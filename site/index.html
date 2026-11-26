@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selvame Srinivassane — Portfolio BTS SIO SISR</title>
+<meta name="description" content="Portfolio de Selvame Srinivassane, étudiant en BTS SIO option SISR : réalisations professionnelles, compétences systèmes & réseaux, veille technologique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  // Applique le thème avant l'affichage pour éviter le flash
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #fafafa;
+    --surface-2: #f3f4f6;
+    --border: #e7e7e9;
+    --text: #0b0b0c;
+    --text-2: #3f3f46;
+    --muted: #71717a;
+    --accent: #2563eb;
+    --accent-soft: #eff4ff;
+    --accent-border: #c7d7fe;
+    --ok: #10b981;
+    --todo-bg: #fffbeb;
+    --todo-border: #f59e0b;
+    --todo-text: #92400e;
+    --radius: 12px;
+    --sidebar-w: 270px;
+    --header-h: 64px;
+    --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0a0b;
+    --surface: #121214;
+    --surface-2: #1a1a1d;
+    --border: #26262b;
+    --text: #f4f4f5;
+    --text-2: #d4d4d8;
+    --muted: #8e8e98;
+    --accent: #6b9bff;
+    --accent-soft: rgba(59,130,246,.10);
+    --accent-border: rgba(96,145,255,.35);
+    --todo-bg: rgba(245,158,11,.10);
+    --todo-border: #b7791f;
+    --todo-text: #fbbf24;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font); font-size: 15px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  svg.i { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  code, .mono { font-family: var(--mono); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+  /* ---------- Header ---------- */
+  .header {
+    position: sticky; top: 0; z-index: 40; height: var(--header-h);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+  }
+  .header-inner { height: 100%; display: flex; align-items: center; gap: 12px; padding: 0 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 600; white-space: nowrap; }
+  .logo {
+    width: 30px; height: 30px; border-radius: 8px; background: var(--text); color: var(--bg);
+    display: grid; place-items: center; font-size: 12px; font-weight: 700; letter-spacing: -.02em;
+  }
+  .crumb-sep { color: var(--muted); font-weight: 400; }
+  .brand-sub { color: var(--text-2); font-weight: 400; font-size: 14px; }
+  .pill {
+    font-family: var(--mono); font-size: 11.5px; color: var(--text-2);
+    border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; background: var(--surface);
+  }
+  .header-right { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+  .hlink { display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border-radius: 8px; font-size: 14px; color: var(--text-2); }
+  .hlink:hover { background: var(--surface-2); color: var(--text); }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--bg); color: var(--text); display: grid; place-items: center; cursor: pointer; margin-left: 8px;
+  }
+  .icon-btn:hover { background: var(--surface-2); }
+  .menu-btn { display: none; margin-left: 0; }
+
+  /* ---------- Layout ---------- */
+  .layout { display: grid; grid-template-columns: var(--sidebar-w) minmax(0, 1fr); max-width: 1440px; }
+  .sidebar {
+    position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h));
+    overflow-y: auto; padding: 26px 18px 28px 28px;
+  }
+  .nav-group + .nav-group { margin-top: 22px; }
+  .nav-title { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2); margin: 0 0 8px 2px; }
+  .nav-link {
+    display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px;
+    color: var(--text-2); font-size: 14px; border-left: 2px solid transparent; margin-bottom: 2px;
+  }
+  .nav-link:hover { background: var(--surface-2); color: var(--text); }
+  .nav-link.active { background: var(--surface-2); color: var(--text); font-weight: 600; border-left-color: var(--accent); }
+  .nav-link.sub { padding-left: 36px; font-size: 13.5px; }
+  .nav-link .txt { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .status-card { margin-top: 26px; border: 1px solid var(--border); background: var(--surface); border-radius: var(--radius); padding: 14px; font-size: 13px; color: var(--text-2); }
+  .status-card strong { display: flex; align-items: center; gap: 8px; color: var(--text); font-size: 13.5px; margin-bottom: 4px; }
+  .dot { width: 8px; height: 8px; border-radius: 99px; background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 20%, transparent); }
+
+  .main { min-width: 0; padding: 40px 56px 80px; display: grid; grid-template-columns: minmax(0, 880px) 200px; gap: 48px; }
+  .main.no-toc { grid-template-columns: minmax(0, 880px); }
+  .toc { position: sticky; top: calc(var(--header-h) + 40px); align-self: start; font-size: 13px; }
+  .toc p { font-weight: 600; margin: 0 0 8px; }
+  .toc a { display: block; color: var(--muted); padding: 4px 0 4px 12px; border-left: 1px solid var(--border); }
+  .toc a:hover { color: var(--text); border-left-color: var(--text); }
+
+  /* ---------- Contenu ---------- */
+  .breadcrumb { display: flex; align-items: center; gap: 8px; color: var(--text-2); font-size: 13px; margin-bottom: 22px; }
+  .breadcrumb .chev { color: var(--muted); }
+  .breadcrumb .cur { color: var(--text); }
+
+  h1.hero { font-size: clamp(34px, 5vw, 50px); line-height: 1.08; letter-spacing: -.035em; font-weight: 800; margin: 0; }
+  h1.hero .soft { color: var(--muted); }
+  h1.page { font-size: clamp(28px, 4vw, 38px); line-height: 1.15; letter-spacing: -.03em; font-weight: 800; margin: 0; }
+  .lead { color: var(--text-2); font-size: 17.5px; line-height: 1.65; max-width: 680px; margin: 18px 0 0; }
+  h2 { font-size: 21px; letter-spacing: -.02em; margin: 44px 0 12px; scroll-margin-top: calc(var(--header-h) + 20px); }
+  h3 { font-size: 15.5px; margin: 0 0 4px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+
+  .callout {
+    display: flex; gap: 12px; align-items: flex-start; margin: 30px 0;
+    background: var(--accent-soft); border: 1px solid var(--accent-border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 14px 18px; font-size: 14.5px;
+  }
+  .callout svg { color: var(--accent); margin-top: 3px; }
+
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cards.two { grid-template-columns: repeat(2, 1fr); }
+  .card {
+    position: relative; display: block; border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px 18px 20px; background: var(--bg); transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+  a.card:hover { border-color: color-mix(in srgb, var(--text) 25%, var(--border)); transform: translateY(-1px); box-shadow: 0 6px 20px -12px rgba(0,0,0,.25); }
+  .card .ico { width: 36px; height: 36px; border-radius: 9px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 18px; }
+  .card .ico svg { width: 18px; height: 18px; }
+  .card .arrow { position: absolute; top: 18px; right: 18px; color: var(--muted); }
+  .card p { color: var(--text-2); font-size: 13.5px; margin: 6px 0 0; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-top: 18px; overflow: hidden; }
+  .stat { padding: 18px; border-left: 1px solid var(--border); }
+  .stat:first-child { border-left: 0; }
+  .stat b { display: block; font-size: 24px; letter-spacing: -.02em; }
+  .stat span { font-size: 13px; color: var(--text-2); }
+
+  .tag { font-family: var(--mono); font-size: 11.5px; padding: 2px 8px; border-radius: 6px; background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); white-space: nowrap; }
+  .tag.blue { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-border); }
+  .tag.ok { background: color-mix(in srgb, var(--ok) 12%, transparent); color: var(--ok); border-color: color-mix(in srgb, var(--ok) 35%, transparent); }
+  .tag.wip { background: var(--todo-bg); color: var(--todo-text); border-color: color-mix(in srgb, var(--todo-border) 50%, transparent); }
+  td code { font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+
+  .todo {
+    display: inline-block; font-size: 12.5px; font-family: var(--mono);
+    background: var(--todo-bg); color: var(--todo-text); border: 1px dashed var(--todo-border);
+    border-radius: 6px; padding: 0 7px;
+  }
+
+  .table-wrap { border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--surface); font-size: 12.5px; font-weight: 600; color: var(--text-2); }
+  tr:last-child td { border-bottom: 0; }
+  td.c, th.c { text-align: center; }
+  .check { color: var(--ok); font-weight: 700; }
+
+  .timeline { list-style: none; padding: 0; margin: 0; border-left: 1px solid var(--border); }
+  .timeline li { position: relative; padding: 0 0 26px 24px; }
+  .timeline li::before { content: ""; position: absolute; left: -5px; top: 7px; width: 9px; height: 9px; border-radius: 99px; background: var(--bg); border: 2px solid var(--accent); }
+  .timeline .when { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .steps { padding-left: 20px; margin: 0; }
+  .steps li { margin-bottom: 8px; color: var(--text-2); }
+  .steps li::marker { color: var(--muted); font-family: var(--mono); font-size: 13px; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; align-items: center; }
+
+  .term {
+    border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
+    font-family: var(--mono); font-size: 13px; padding: 16px 18px; line-height: 1.75; overflow-x: auto;
+  }
+  .term .p { color: var(--ok); }
+  .term .c { color: var(--muted); }
+
+  .doc-link { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; font-size: 14px; }
+  .doc-link:hover { background: var(--surface); }
+  .doc-link .muted { margin-left: auto; font-size: 12px; font-family: var(--mono); }
+
+  .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .shot { margin: 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg); display: flex; flex-direction: column; }
+  .shot-img { position: relative; display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in; background: var(--surface-2); aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .shot-img img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; transition: transform .3s ease; }
+  .shot-img:hover img { transform: scale(1.03); }
+  .shot-img .zoom { position: absolute; right: 10px; bottom: 10px; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: rgba(0,0,0,.6); color: #fff; opacity: 0; transition: opacity .2s; }
+  .shot-img:hover .zoom, .shot-img:focus-visible .zoom { opacity: 1; }
+  .shot figcaption { display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px 16px; font-size: 13.5px; }
+  .shot figcaption strong { display: block; font-size: 14.5px; margin-bottom: 2px; }
+  .shot figcaption p { margin: 0; color: var(--text-2); }
+  .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.82); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px; padding: 24px 16px; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: min(1200px, 100%); max-height: calc(100vh - 110px); border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.5); background: #fff; }
+  .lightbox p { color: #e5e5e5; margin: 0; font-size: 14px; text-align: center; }
+  .lightbox .lb-close { position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 10px; border: 0; background: rgba(255,255,255,.12); color: #fff; display: grid; place-items: center; cursor: pointer; }
+  @media (max-width: 700px) { .gallery { grid-template-columns: 1fr; } }
+
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; margin-top: 30px; align-items: start; }
+  .contact-side { display: grid; gap: 14px; }
+  .form { border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; background: var(--bg); }
+  .form h3 { margin-bottom: 4px; }
+  .form .sub { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field input, .field textarea {
+    width: 100%; font: inherit; font-size: 14.5px; color: var(--text); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 9px; padding: 10px 12px;
+  }
+  .field textarea { min-height: 140px; resize: vertical; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .hp { position: absolute; left: -9999px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer; font: inherit; font-weight: 600; font-size: 14px;
+    background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 9px;
+  }
+  .btn:hover { opacity: .88; }
+  .btn:disabled { opacity: .5; cursor: wait; }
+  .form-status { margin-top: 14px; font-size: 14px; border-radius: 9px; padding: 10px 12px; display: none; }
+  .form-status.ok { display: block; background: color-mix(in srgb, var(--ok) 12%, transparent); color: var(--ok); border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent); }
+  .form-status.err { display: block; background: var(--todo-bg); color: var(--todo-text); border: 1px solid color-mix(in srgb, var(--todo-border) 50%, transparent); }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .pager a { border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; }
+  .pager a:hover { border-color: color-mix(in srgb, var(--text) 25%, var(--border)); }
+  .pager small { display: block; color: var(--muted); font-size: 12px; }
+  .pager .next { text-align: right; grid-column: 2; }
+
+  .page-footer { margin-top: 28px; font-size: 12.5px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  .fade { animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  .backdrop { display: none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1240px) {
+    .main { grid-template-columns: minmax(0, 880px); padding: 36px 40px 72px; }
+    .toc { display: none; }
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .menu-btn { display: grid; }
+    .sidebar {
+      position: fixed; z-index: 50; top: var(--header-h); left: 0; bottom: 0; width: 290px; height: auto;
+      background: var(--bg); border-right: 1px solid var(--border);
+      transform: translateX(-100%); transition: transform .2s ease;
+    }
+    body.nav-open .sidebar { transform: none; }
+    body.nav-open .backdrop { display: block; position: fixed; inset: var(--header-h) 0 0 0; z-index: 45; background: rgba(0,0,0,.35); }
+    .hlink .lbl, .brand-sub, .crumb-sep, .pill { display: none; }
+    .header-inner { padding: 0 16px; }
+    .main { padding: 28px 16px 64px; }
+    .cards, .cards.two { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(3) { border-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .fade { animation: none; }
+    .card, .sidebar { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <a href="#/" class="brand">
+      <span class="logo">SS</span>
+      <span>Selvame Srinivassane</span>
+      <span class="crumb-sep">/</span>
+      <span class="brand-sub">Portfolio</span>
+      <span class="pill">v2026.sisr</span>
+    </a>
+    <div class="header-right">
+      <a class="hlink" href="https://www.linkedin.com/in/selvame-srinivassane-29b6972b8/" target="_blank" rel="noopener noreferrer">
+        <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span class="lbl">LinkedIn</span>
+      </a>
+      <a class="hlink" href="docs/CV_Selvame_Srinivassane.pdf" target="_blank" rel="noopener">
+        <svg class="i" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg><span class="lbl">CV</span>
+      </a>
+      <a class="hlink" href="#/contact">
+        <svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="lbl">Contact</span>
+      </a>
+      <button class="icon-btn" id="themeBtn" aria-label="Changer de thème"></button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar" aria-label="Navigation"></aside>
+  <div class="backdrop" id="backdrop"></div>
+  <main class="main" id="main"></main>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Capture agrandie">
+  <button class="lb-close" id="lbClose" aria-label="Fermer"></button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+</div>
+
+<script>
+/* =====================================================================
+   DONNÉES — c'est ici que tu modifies le contenu du portfolio.
+   Tout ce qui est marqué TODO(...) s'affiche en jaune sur le site.
+   ===================================================================== */
+
+const PROFIL = {
+  nom: "Selvame Srinivassane",
+  titre: "Étudiant BTS SIO SISR.",
+  accroche: "J'administre des systèmes et des réseaux : je les installe, je les configure, je les sécurise — et je documente chaque étape.",
+  actuellement: "Étudiant en 2e année de BTS SIO option SISR à ENSITECH (Montigny-le-Bretonneux), en alternance comme technicien support informatique à la DGFiP.",
+  statut: "Prochaine étape",
+  recherche: "Bachelor Cybersécurité dès 2027. Je recherche une entreprise pour m'accompagner en alternance.",
+  email: "Selvame1711@gmail.com",
+  linkedin: "https://www.linkedin.com/in/selvame-srinivassane-29b6972b8/",
+  cv: "docs/CV_Selvame_Srinivassane.pdf",
+  // Clé Web3Forms (reçue par mail sur web3forms.com) : colle-la entre les guillemets pour activer le formulaire
+  cleFormulaire: "21bd60b8-2c0d-4b85-be13-9402040ba0b2",
+  majLe: "novembre 2026",
+};
+
+// Les 6 blocs de compétences de l'épreuve E5 (tableau de synthèse)
+const COMPETENCES_E5 = [
+  "Gérer le patrimoine informatique",
+  "Répondre aux incidents et aux demandes d'assistance et d'évolution",
+  "Développer la présence en ligne de l'organisation",
+  "Travailler en mode projet",
+  "Mettre à disposition des utilisateurs un service informatique",
+  "Organiser son développement professionnel",
+];
+
+// Réalisations professionnelles. "competences" = numéros (1 à 6) des blocs E5 ci-dessus.
+const REALISATIONS = [
+  {
+    id: "stadiumcompany",
+    titre: "Infrastructure réseau sécurisée — StadiumCompany",
+    court: "StadiumCompany",
+    type: "Projet",
+    cadre: "Réalisation en cours de formation",
+    periode: "15/09/26 — en cours",
+    resume: "Conception et déploiement complet d'une infrastructure d'entreprise virtualisée : segmentation par VLAN, pare-feu pfSense, Active Directory, GLPI / OCS Inventory, haute disponibilité et sauvegarde.",
+    contexte: "Dans le cadre de la préparation à l'épreuve pratique du BTS SIO (option SISR), conception et déploiement d'une infrastructure réseau d'entreprise virtualisée sous VMware Workstation Pro pour l'entreprise fictive StadiumCompany.",
+    objectifs: [
+      "Segmenter les flux par service grâce aux VLAN",
+      "Centraliser l'administration des identités avec Active Directory",
+      "Sécuriser les accès internes et externes via un pare-feu central",
+      "Gérer le parc et les demandes des utilisateurs",
+    ],
+    environnement: ["VMware Workstation Pro", "pfSense", "Windows Server", "AD DS", "DNS", "DHCP", "Debian", "Apache2", "MariaDB", "PHP", "GLPI", "OCS Inventory", "HAProxy", "Bacula", "Windows 10"],
+    tableaux: [
+      {
+        id: "adressage", titre: "Plan d'adressage & VLAN",
+        colonnes: ["VLAN", "Zone", "Réseau", "Passerelle (pfSense)", "Équipements & IP"],
+        lignes: [
+          ["WAN", "Accès Internet (NAT)", "DHCP VMware", "Passerelle hôte", "Interface WAN pfSense"],
+          ["VLAN 10", "Admin / Serveurs", "172.20.1.0/24", "172.20.1.1", "Windows Server AD / DNS / DHCP : 172.20.1.2<br>Serveur GLPI / OCS Inventory : 172.20.1.15<br>PC-ADMIN : 172.20.1.80"],
+          ["VLAN 20", "Équipes / Utilisateurs", "172.20.2.0/24", "172.20.2.1", "Postes clients métiers (DHCP)"],
+          ["VLAN 30", "Wi-Fi / Invités", "172.20.3.0/24", "172.20.3.1", "Bornes et terminaux mobiles, isolés du réseau interne"],
+          ["VLAN 40", "DMZ (services exposés)", "172.20.4.0/24", "172.20.4.1", "Load balancer HAProxy<br>Serveurs web frontaux"],
+        ],
+      },
+      {
+        id: "services", titre: "Services déployés",
+        colonnes: ["Service", "Ce qui a été fait", "Statut"],
+        lignes: [
+          ["Routage & pare-feu — pfSense", "Routage inter-VLAN et NAT sortant pour l'accès Internet des sous-réseaux autorisés. Cloisonnement des flux par règles de filtrage par interface (blocage par défaut / <em>implicit deny</em>).", "Validé"],
+          ["Annuaire — Windows Server", "Domaine Active Directory <code>stadiumcompany.com</code>, DNS interne, intégration du poste PC-ADMIN (Windows 10) avec authentification Kerberos.", "Validé"],
+          ["Parc & ticketing — GLPI / OCS", "Déploiement sur Debian (172.20.1.15) avec Apache2 / MariaDB / PHP.", "Validé"],
+          ["Répartition de charge — HAProxy", "Répartition HTTP vers les serveurs web de la DMZ.", "En cours"],
+          ["Sauvegarde — Bacula", "Sauvegarde centralisée des configurations et des bases de données.", "En cours"],
+        ],
+      },
+      {
+        id: "recette", titre: "Cahier de recette",
+        colonnes: ["Test", "Source", "Destination", "Résultat attendu", "Statut"],
+        lignes: [
+          ["Connectivité passerelle", "PC-ADMIN (172.20.1.80)", "pfSense (172.20.1.1)", "Réponse ICMP (ping OK)", "Validé"],
+          ["Accès Internet (NAT)", "PC-ADMIN (172.20.1.80)", "Externe (1.1.1.1)", "Sortie via pfSense (ping OK)", "Validé"],
+          ["Résolution DNS interne", "PC-ADMIN (172.20.1.80)", "stadiumcompany.com", "Résolution vers 172.20.1.2", "Validé"],
+          ["Authentification domaine", "PC-ADMIN (Windows 10)", "Contrôleur AD (172.20.1.2)", "Ouverture de session STADIUMCOMPANY\\Administrateur", "Validé"],
+          ["Disponibilité web GLPI", "VLAN 10", "http://172.20.1.15", "Apache : HTTP/1.1 200 OK", "Validé"],
+          ["Cloisonnement inter-VLAN", "VLAN 30 / VLAN 20", "VLAN 10 (serveurs)", "Trafic bloqué par pfSense", "À finaliser"],
+        ],
+      },
+    ],
+    etapes: [
+      "Conception du plan d'adressage et de la segmentation en 4 VLAN + WAN",
+      "Installation de pfSense : interfaces, routage inter-VLAN, NAT sortant et règles de filtrage",
+      "Déploiement de Windows Server : AD DS, DNS, DHCP et domaine stadiumcompany.com",
+      "Intégration du poste PC-ADMIN au domaine",
+      "Installation de GLPI et OCS Inventory sur Debian (Apache2 / MariaDB / PHP)",
+      "Mise en place de HAProxy en DMZ et de Bacula (en cours)",
+      "Rédaction et exécution du cahier de recette",
+    ],
+    competences: [1, 2, 4, 5],
+    galerie: [
+      { img: "docs/stadiumcompany/01-pfsense-console.png", titre: "pfSense — interfaces", legende: "Console pfSense 2.6 : WAN en DHCP et les 4 réseaux internes (Admin, Équipe, Wi-Fi, DMZ) sur leurs passerelles 172.20.x.1." },
+      { img: "docs/stadiumcompany/02-ad-serveur-local.png", titre: "Windows Server — contrôleur de domaine", legende: "Serveur Windows Server 2019 membre du domaine stadiumcompany.com, en adresse fixe 172.20.1.2." },
+      { img: "docs/stadiumcompany/03-client-ipconfig.png", titre: "Poste client — VLAN Équipe", legende: "Le poste Windows 10 reçoit automatiquement son adresse (172.20.2.11), sa passerelle et le suffixe DNS du domaine par DHCP." },
+      { img: "docs/stadiumcompany/04-glpi-tableau-de-bord.png", titre: "GLPI — gestion de parc", legende: "Interface web de GLPI hébergée sur le serveur Debian 172.20.1.15, accessible depuis le réseau d'administration." },
+    ],
+    documents: [
+      { nom: "Documentation technique — Infrastructure StadiumCompany", fichier: "docs/stadiumcompany/Documentation-technique-StadiumCompany.pdf" },
+    ],
+  },
+  {
+    id: "dgfip",
+    titre: "Support utilisateurs et préparation des postes de travail",
+    court: "DGFiP — Support & postes",
+    type: "Alternance",
+    cadre: "Réalisation en milieu professionnel",
+    periode: "01/10/25 au 31/07/27",
+    entreprise: "DGFiP — ENFiP Noisy-le-Grand",
+    resume: "Support informatique de premier niveau pour une quarantaine d'agents, et préparation des postes de travail avec un socle logiciel adapté au profil de chaque utilisateur.",
+    contexte: "Le pôle Soutien informatique de l'ENFiP assure l'assistance d'une quarantaine d'agents et des formateurs de l'école. Chaque nouveau poste doit être préparé avec un socle logiciel adapté à son utilisateur : certaines applications sont réservées à certains niveaux hiérarchiques, d'autres non.",
+    objectifs: [
+      "Diagnostiquer et résoudre les incidents matériels et réseau de premier niveau",
+      "Préparer et installer des postes de travail conformes au socle de l'établissement",
+      "Assurer la continuité de service pour les agents et les formateurs",
+    ],
+    environnement: ["Windows 10 / 11", "Windows Server", "TCP/IP", "DHCP", "DNS", "Outil d'analyse réseau"],
+    etapes: [
+      "Prise en charge des demandes et incidents des utilisateurs, diagnostic et résolution de premier niveau",
+      "Soclage des postes : installation du socle logiciel selon la catégorie de l'utilisateur (applications différentes selon le niveau hiérarchique)",
+      "Branchement, configuration et test du matériel sur les nouveaux postes",
+      "Diagnostic réseau à l'aide d'un équipement d'analyse",
+      "Accompagnement de l'équipe réseau de Noisiel lors de ses interventions sur les pannes réseau, pour observer sa méthode de diagnostic",
+    ],
+    tableaux: [
+      {
+        id: "incident", titre: "Exemple d'incident résolu",
+        colonnes: ["Étape", "Détail"],
+        lignes: [
+          ["Signalement", "Une agente signale qu'elle n'a plus accès au réseau : pas d'Internet, ni de lecteurs partagés, ni de messagerie."],
+          ["Diagnostic", "Sur le poste, <code>ipconfig</code> affiche une adresse en 169.254.x.x (APIPA) : le poste ne reçoit pas d'adresse du serveur DHCP. Le voyant de la carte réseau est éteint, donc le problème est physique. Je teste le câble sur un autre poste : il ne fonctionne pas non plus."],
+          ["Résolution", "Remplacement du câble réseau défectueux, puis <code>ipconfig /renew</code> : le poste obtient une adresse valide. Vérification avec un <code>ping</code> vers la passerelle, puis de l'accès aux lecteurs réseau et à la messagerie."],
+          ["Clôture", "Confirmation auprès de l'utilisatrice que tout fonctionne, et câble défectueux retiré du stock."],
+        ],
+      },
+    ],
+    competences: [2, 5],
+    documents: [{ nom: "Fiche technique — Support utilisateurs et préparation des postes", fichier: "docs/dgfip/Fiche-DGFiP-Support-et-postes.pdf" }],
+  },
+  {
+    id: "dgfip-minipc",
+    titre: "Déploiement de mini-PC dans 27 salles de cours",
+    court: "DGFiP — Mini-PC en salles",
+    type: "Alternance",
+    cadre: "Réalisation en milieu professionnel",
+    periode: "01/10/25 au 31/07/27",
+    entreprise: "DGFiP — ENFiP Noisy-le-Grand",
+    resume: "Installation de mini-PC (format « Tiny ») dans 27 salles de cours, pour que les formateurs n'aient plus besoin d'apporter leur propre ordinateur.",
+    contexte: "Jusqu'ici, les formateurs devaient apporter et brancher leur propre ordinateur dans chacune des 27 salles de cours de l'école. Pour leur simplifier la tâche, l'établissement a décidé d'équiper chaque salle d'un mini-PC fixe, prêt à l'emploi.",
+    objectifs: [
+      "Équiper chaque salle d'un poste fixe prêt à l'emploi",
+      "Simplifier le quotidien des formateurs",
+      "Référencer les nouveaux équipements dans l'outil de suivi du parc",
+    ],
+    environnement: ["Mini-PC format Tiny", "Windows 10 / 11", "SIGMA (suivi du parc)"],
+    etapes: [
+      "Recensement des 27 salles à équiper",
+      "Préparation et soclage des mini-PC",
+      "Installation, raccordement et tests dans chaque salle",
+      "Enregistrement du matériel dans SIGMA",
+      "Bilan : les formateurs trouvent le dispositif beaucoup plus pratique. Ils n'ont plus à transporter leur ordinateur d'une salle à l'autre, et le poste est prêt dès leur arrivée, ce qui leur fait gagner du temps en début de cours.",
+    ],
+    competences: [1, 5],
+    documents: [{ nom: "Fiche technique — Déploiement de mini-PC dans 27 salles", fichier: "docs/dgfip/Fiche-DGFiP-Mini-PC-salles.pdf" }],
+  },
+  {
+    id: "dgfip-wifi",
+    titre: "Projet d'installation du Wi-Fi dans les salles de cours",
+    court: "DGFiP — Projet Wi-Fi",
+    type: "Alternance",
+    cadre: "Réalisation en milieu professionnel",
+    periode: "01/10/25 au 31/07/27",
+    entreprise: "DGFiP — ENFiP Noisy-le-Grand",
+    resume: "Participation à un projet de couverture Wi-Fi des salles de cours : recensement des besoins, demandes de devis, appel d'offres, analyse du terrain, puis installation prévue en décembre.",
+    contexte: "L'école souhaite offrir un accès Wi-Fi dans ses salles de cours. Comme toute administration, elle doit passer par une procédure d'achat public (appel d'offres) pour choisir le prestataire. Les travaux sont planifiés pendant les vacances des élèves pour ne pas perturber les cours.",
+    objectifs: [
+      "Définir le besoin : nombre de salles et couverture attendue",
+      "Comparer les offres et préparer le choix du prestataire",
+      "Suivre l'installation jusqu'à la mise en service",
+    ],
+    environnement: ["Wi-Fi", "Bornes d'accès", "Devis & appel d'offres", "Gestion de projet"],
+    etapes: [
+      "Recensement des salles à couvrir",
+      "Demandes de devis auprès des fournisseurs",
+      "Participation à l'appel d'offres : désignation du porteur de projet et choix du prestataire",
+      "Analyse du terrain (étude de couverture des salles), en cours",
+      "Installation planifiée en décembre, pendant les vacances des élèves, pour ne pas perturber les cours",
+    ],
+    competences: [1, 4, 5],
+    documents: [{ nom: "Fiche technique — Projet Wi-Fi des salles de cours", fichier: "docs/dgfip/Fiche-DGFiP-Projet-WiFi.pdf" }],
+  },
+  {
+    id: "dgfip-parc",
+    titre: "Gestion du parc informatique : suivi, achats et fin de vie",
+    court: "DGFiP — Gestion du parc",
+    type: "Alternance",
+    cadre: "Réalisation en milieu professionnel",
+    periode: "01/10/25 au 31/07/27",
+    entreprise: "DGFiP — ENFiP Noisy-le-Grand",
+    resume: "Suivi du parc dans l'applicatif SIGMA, commande du matériel manquant via le fournisseur de référence et gestion de la fin de vie du matériel (dons à des associations).",
+    contexte: "Le pôle Soutien informatique doit savoir à tout moment quel matériel est en service, où il se trouve et quand il faut le remplacer. Ce suivi se fait dans SIGMA, l'applicatif de gestion du parc de l'établissement. Les achats passent par Inmac, le fournisseur de référence, et le matériel trop ancien est donné à des associations.",
+    objectifs: [
+      "Tenir à jour l'inventaire du parc (écrans, mini-PC, postes…)",
+      "Identifier et commander le matériel manquant",
+      "Donner une seconde vie au matériel ancien",
+    ],
+    environnement: ["SIGMA (suivi du parc)", "Inmac (fournisseur de référence)", "Inventaire"],
+    etapes: [
+      "Mise à jour de l'inventaire dans SIGMA",
+      "Identification du matériel manquant et commande sur Inmac, le site de référence de l'établissement",
+      "Réception et mise en service du matériel",
+      "Sortie d'inventaire du matériel de plus de 5 ans et préparation des dons à des associations",
+    ],
+    competences: [1, 2],
+    documents: [{ nom: "Fiche technique — Gestion du parc informatique", fichier: "docs/dgfip/Fiche-DGFiP-Gestion-du-parc.pdf" }],
+  },
+  {
+    id: "portfolio",
+    titre: "Conception de mon portfolio professionnel",
+    court: "Portfolio",
+    type: "Projet",
+    cadre: "Réalisation en cours de formation",
+    periode: "01/11/26 — en cours",
+    resume: "Conception, rédaction et mise en ligne de ce portfolio pour présenter mes réalisations et gérer mon identité professionnelle.",
+    contexte: "Support de présentation pour l'épreuve E5 du BTS SIO et pour mes candidatures.",
+    objectifs: ["Présenter mes réalisations", "Gérer mon identité professionnelle", "Mettre en ligne le site"],
+    environnement: ["HTML", "CSS", "JavaScript", "TODO(hébergement)"],
+    etapes: ["Choix de la structure et de la charte", "Rédaction du contenu", "Mise en ligne"],
+    competences: [3, 6],
+    documents: [{ nom: "Fiche technique — Conception du portfolio", fichier: "docs/portfolio/Fiche-Portfolio.pdf" }],
+  },
+];
+
+const FORMATION = [
+  { quand: "2027 — 2028", titre: "Bachelor Cybersécurité, systèmes et réseaux (visé)", lieu: "ENSITECH — Montigny-le-Bretonneux", desc: "" },
+  { quand: "2025 — 2027", titre: "BTS SIO — option SISR", lieu: "ENSITECH — Montigny-le-Bretonneux", desc: "Administration des systèmes, des réseaux et sécurité des infrastructures." },
+  { quand: "2020 — 2021", titre: "Baccalauréat STI2D", lieu: "Lycée Émilie-de-Breteuil — Montigny-le-Bretonneux", desc: "" },
+];
+const EXPERIENCES = [
+  { quand: "Oct. 2025 — juil. 2027", titre: "Technicien support informatique — alternance", lieu: "DGFiP — Noisy-le-Grand", desc: "Pôle Soutien informatique : support de 1er niveau, soclage des postes, déploiement de mini-PC dans 27 salles, projet Wi-Fi, gestion du parc." },
+  { quand: "2024 — 2025", titre: "Gestionnaire RH — Paie", lieu: "Cour d'appel de Paris", desc: "Gestion administrative et paie, mise à jour du SIRH, arrivées et départs des personnels." },
+  { quand: "2023 — 2024", titre: "Opérateur de numérisation", lieu: "Iron Mountain — Trappes", desc: "Traitement des factures fournisseurs, résolution d'anomalies en équipe." },
+];
+const CERTIFS = ["PIX"];
+
+// Niveaux : "Notions", "Pratique", "Maîtrise"
+const COMPETENCES_TECH = [
+  { domaine: "Systèmes", items: [["Postes Windows 10 / 11 (installation, diagnostic)", "Maîtrise"], ["Windows Server — AD DS, DNS, DHCP", "Pratique"], ["Linux Debian (Apache2, MariaDB, PHP)", "Pratique"], ["Virtualisation (VMware Workstation Pro)", "Pratique"]] },
+  { domaine: "Réseaux", items: [["Adressage IPv4, sous-réseaux", "Maîtrise"], ["VLAN, routage inter-VLAN", "Pratique"], ["NAT, DMZ", "Pratique"]] },
+  { domaine: "Sécurité", items: [["Pare-feu pfSense (filtrage, implicit deny)", "Pratique"], ["Authentification Kerberos / domaine", "Notions"], ["SSH, VPN", "Notions"]] },
+  { domaine: "Services & outils", items: [["GLPI / OCS Inventory", "Pratique"], ["HAProxy (répartition de charge)", "Notions"], ["Bacula (sauvegarde)", "Notions"], ["Scripting Bash / PowerShell", "Notions"]] },
+];
+
+const VEILLE = {
+  sujet: "Après le rachat de VMware par Broadcom : la migration des entreprises vers Proxmox VE",
+  pourquoi: "La virtualisation est au cœur du métier d'administrateur systèmes et réseaux : presque tous les serveurs d'une entreprise tournent aujourd'hui dans des machines virtuelles. Depuis le rachat de VMware par Broadcom, la solution la plus utilisée du marché a vu ses prix exploser, et de nombreuses organisations cherchent une alternative. J'ai moi-même monté mon infrastructure StadiumCompany sous VMware : ce sujet me concerne directement et touche aussi bien les PME que les administrations, attentives à leurs coûts.",
+  synthese: [
+    "<strong>Le déclencheur.</strong> Broadcom a finalisé le rachat de VMware fin 2023. Les licences perpétuelles ont été supprimées au profit d'abonnements facturés par cœur de processeur, avec un minimum de 16 cœurs par CPU. Selon les contrats, les hausses de prix vont de +150 % à plus de +1 000 %.",
+    "<strong>La réaction du marché.</strong> Beaucoup d'entreprises évaluent des alternatives. Proxmox VE, une solution libre (licence AGPLv3) basée sur Debian, en est la principale bénéficiaire. Sa version 9.2 (mai 2026) ajoute la répartition automatique des machines virtuelles entre les serveurs, l'équivalent de la fonction DRS de VMware. Les autres alternatives citées sont XCP-ng et Nutanix AHV.",
+    "<strong>Le volet juridique.</strong> En mars 2026, le CISPE, qui regroupe des hébergeurs cloud européens, a déposé une plainte auprès de la Commission européenne contre Broadcom pour abus de position dominante, après la fin de son programme partenaires en Europe.",
+    "<strong>Ce que j'en retiens.</strong> Une migration ne se fait pas d'un coup : les équipes construisent souvent un second cluster sous Proxmox et y déplacent les machines au fil des renouvellements de licences VMware. Les principaux freins sont la formation des équipes et la reprise des outils de sauvegarde et de supervision.",
+  ],
+  themes: [
+    ["Coûts & licences", "Évolution des offres Broadcom (abonnements, VCF, VVF, vSphere Express) et impact sur les budgets."],
+    ["Alternatives", "Proxmox VE, XCP-ng, Nutanix AHV : fonctionnalités, limites, maturité."],
+    ["Migration", "Outils de conversion des machines virtuelles, stratégies de migration progressive, retours d'expérience."],
+    ["Souveraineté & droit", "Plaintes du CISPE, réaction de la Commission européenne, dépendance aux éditeurs étrangers."],
+  ],
+  outils: [
+    ["Flux RSS", "Le Monde Informatique, IT-Connect, Next : suivi des articles sur la virtualisation."],
+    ["Alertes Google", "Alertes sur les mots-clés « Proxmox », « Broadcom VMware » et « migration VMware »."],
+    ["Sites officiels", "Notes de version de Proxmox VE et annonces de Broadcom, pour vérifier les informations à la source."],
+    ["Communautés", "Forum Proxmox et Reddit r/Proxmox : retours d'expérience d'administrateurs."],
+    ["Fiches de synthèse", "Un résumé par article, classé par thème, pour capitaliser la veille."],
+  ],
+  articles: [
+    { date: "11/2025", titre: "Broadcom's licensing overhaul sparks surge in Proxmox adoption", source: "Open Source For You", lien: "https://www.opensourceforu.com/2025/11/broadcoms-licensing-overhaul-sparks-surge-in-proxmox-adoption/" },
+    { date: "18/03/26", titre: "Le piège des coûts VMware en 2026 : pourquoi les équipes IT doivent décider dès maintenant", source: "Cloudmagazin", lien: "https://www.cloudmagazin.com/fr/2026/03/18/le-piege-des-couts-vmware-en-2026-pourquoi-les-equipes-it-doivent-decider-des-ma/" },
+    { date: "19/03/26", titre: "EU cloud lobby takes Broadcom to Brussels over VMware partner purge", source: "The Register", lien: "https://www.theregister.com/2026/03/19/cispe_eu_complaint_vmware_vcsp_closure/" },
+    { date: "20/03/26", titre: "Broadcom visé par une plainte antitrust de l'UE et une demande de mesure provisoire", source: "Boursorama (Reuters)", lien: "https://www.boursorama.com/bourse/actualites/broadcom-vise-par-une-plainte-antitrust-de-l-ue-et-une-demande-de-mesure-provisoire-f57bb9d12f76709110d83fe2e6b061f6" },
+    { date: "22/04/26", titre: "VMware in the Post-Broadcom Era 2026: What Companies Must Decide Now", source: "Cloudmagazin", lien: "https://www.cloudmagazin.com/en/2026/04/22/vmware-in-the-postbroadcom-era-2026-what-dach-companies-must/" },
+    { date: "2026", titre: "VMware vSphere Express : Broadcom revient vers les PME", source: "IT-Connect", lien: "https://www.it-connect.tech/broadcom-unveils-vmware-vsphere-express-to-win-back-smbs/" },
+    { date: "2026", titre: "Alternatives à VMware : migrer sur Proxmox, mode d'emploi", source: "Le Monde Informatique", lien: "https://www.lemondeinformatique.fr/publi_info/lire-alternatives-a-vmware-migrer-sur-proxmox-mode-d-emploi-1098.html" },
+  ],
+};
+
+/* =====================================================================
+   RENDU — tu n'as normalement pas besoin de modifier en dessous.
+   ===================================================================== */
+
+const ICONS = {
+  book: '<path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  cap: '<path d="m22 9-10-5L2 9l10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/>',
+  server: '<rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M7 7h.01M7 17h.01"/>',
+  network: '<rect x="9" y="2" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M12 8v4M5 16v-2h14v2"/>',
+  briefcase: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  table: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/>',
+  layers: '<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5M2 17l10 5 10-5"/>',
+  rss: '<path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/>',
+  arrow: '<path d="M7 17 17 7M8 7h9v9"/>',
+  chev: '<path d="m9 18 6-6-6-6"/>',
+  file: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  moon: '<path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/>',
+  shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>',
+  download: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+  zoom: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/>',
+  close: '<path d="M18 6 6 18M6 6l12 12"/>',
+};
+const ic = (n, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24">${ICONS[n]}</svg>`;
+
+// Transforme "TODO(xxx)" en badge jaune visible
+const t = (s) => String(s ?? '').replace(/TODO\(([^)]*)\)/g, '<span class="todo">$1</span>');
+const typeIcon = (r) => (r.type === 'Alternance' && r.id !== 'dgfip-wifi') ? 'briefcase' :(r.id === 'stadiumcompany' || r.id === 'dgfip-wifi') ? 'network' : r.type === 'Projet' ? 'layers' : 'server';
+
+// Ordre des pages (pour la navigation précédent / suivant)
+const PAGES = [
+  { path: '/', titre: 'Introduction', groupe: 'Démarrer', icon: 'book' },
+  { path: '/profil', titre: 'Profil', groupe: 'Démarrer', icon: 'user' },
+  { path: '/formation', titre: 'Formation & expériences', groupe: 'Parcours', icon: 'cap' },
+  { path: '/realisations', titre: "Vue d'ensemble", groupe: 'Réalisations', icon: 'grid' },
+  ...REALISATIONS.map(r => ({ path: '/realisations/' + r.id, titre: r.court, groupe: 'Réalisations', icon: typeIcon(r), sub: true })),
+  { path: '/synthese', titre: 'Tableau de synthèse E5', groupe: 'Réalisations', icon: 'table' },
+  { path: '/competences', titre: 'Compétences', groupe: 'Référence', icon: 'layers' },
+  { path: '/veille', titre: 'Veille technologique', groupe: 'Référence', icon: 'rss' },
+  { path: '/contact', titre: 'Contact', groupe: 'Référence', icon: 'mail' },
+];
+
+function renderSidebar(current) {
+  const groups = [...new Set(PAGES.map(p => p.groupe))];
+  const html = groups.map(g => `
+    <div class="nav-group">
+      <p class="nav-title">${g}</p>
+      ${PAGES.filter(p => p.groupe === g).map(p => `
+        <a class="nav-link ${p.sub ? 'sub' : ''} ${p.path === current ? 'active' : ''}" href="#${p.path}">
+          ${p.sub ? '' : ic(p.icon)}<span class="txt">${p.titre}</span>
+        </a>`).join('')}
+    </div>`).join('');
+  document.getElementById('sidebar').innerHTML = html + `
+    <div class="status-card">
+      <strong><span class="dot"></span> ${PROFIL.statut}</strong>
+      ${PROFIL.recherche}
+    </div>`;
+}
+
+function breadcrumb(groupe, titre, parent) {
+  return `<nav class="breadcrumb">${ic('book')}<span>${groupe}</span>
+    ${parent ? `<span class="chev">›</span><a href="#${parent[1]}">${parent[0]}</a>` : ''}
+    <span class="chev">›</span><span class="cur">${titre}</span></nav>`;
+}
+
+function pager(current) {
+  const i = PAGES.findIndex(p => p.path === current);
+  const prev = PAGES[i - 1], next = PAGES[i + 1];
+  return `<div class="pager">
+    ${prev ? `<a href="#${prev.path}"><small>← Précédent</small>${prev.titre}</a>` : ''}
+    ${next ? `<a class="next" href="#${next.path}"><small>Suivant →</small>${next.titre}</a>` : ''}
+  </div>
+  <div class="page-footer"><span>© ${new Date().getFullYear()} ${PROFIL.nom} — BTS SIO SISR</span><span>Dernière mise à jour : ${PROFIL.majLe}</span></div>`;
+}
+
+const toc = (items) => `<aside class="toc"><p>Sur cette page</p>${items.map(([id, l]) => `<a href="#${location.hash.split('#')[1] || '/'}" data-target="${id}">${l}</a>`).join('')}</aside>`;
+
+// Badge de couleur pour les statuts dans les tableaux
+const statut = (c) => c === 'Validé' ? '<span class="tag ok">✓ Validé</span>'
+  : (c === 'En cours' || c === 'À finaliser') ? `<span class="tag wip">${c}</span>` : t(c);
+
+const timeline = (list) => `<ul class="timeline">${list.map(f => `
+  <li><div class="when">${t(f.quand)}</div><h3>${t(f.titre)}</h3>
+    <p class="muted" style="margin:0">${t(f.lieu)}</p>${f.desc ? `<p style="margin-top:6px;color:var(--text-2)">${t(f.desc)}</p>` : ''}</li>`).join('')}
+</ul>`;
+
+const compChips =(list) => list.map(n => `<span class="tag blue" title="${COMPETENCES_E5[n - 1]}">C${n}</span>`).join('');
+
+/* ---------- Pages ---------- */
+const VIEWS = {
+  '/': () => {
+    const stages = EXPERIENCES.length;
+    const couvertes = new Set(REALISATIONS.flatMap(r => r.competences)).size;
+    return `
+    ${breadcrumb('Démarrer', 'Introduction')}
+    <h1 class="hero">${PROFIL.nom}.<br><span class="soft">${PROFIL.titre}</span></h1>
+    <p class="lead">${PROFIL.accroche}</p>
+    <div class="callout">${ic('info')}<div><strong>Actuellement</strong> — ${t(PROFIL.actuellement)}</div></div>
+    <div class="cards">
+      <a class="card" href="#/realisations"><span class="arrow">${ic('arrow')}</span><div class="ico">${ic('briefcase')}</div>
+        <h3>Réalisations</h3><p>Projets et missions en alternance, documentés étape par étape.</p></a>
+      <a class="card" href="#/competences"><span class="arrow">${ic('arrow')}</span><div class="ico">${ic('layers')}</div>
+        <h3>Compétences</h3><p>Systèmes, réseaux, sécurité et outils.</p></a>
+      <a class="card" href="#/contact"><span class="arrow">${ic('arrow')}</span><div class="ico">${ic('mail')}</div>
+        <h3>Contact</h3><p>Une alternance, un stage, un échange technique.</p></a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>${REALISATIONS.length}</b><span>réalisations documentées</span></div>
+      <div class="stat"><b>${stages}</b><span>expériences professionnelles</span></div>
+      <div class="stat"><b>${couvertes}/6</b><span>blocs de compétences E5</span></div>
+      <div class="stat"><b>2027</b><span>session du BTS</span></div>
+    </div>
+    ${pager('/')}`;
+  },
+
+  '/profil': () => `
+    ${breadcrumb('Démarrer', 'Profil')}
+    <h1 class="page">Profil</h1>
+    <p class="lead">Qui je suis, ce que je fais et où je veux aller.</p>
+    <h2 id="apropos">À propos</h2>
+    <p style="color:var(--text-2)">Étudiant en BTS SIO option SISR à Ensitech, je m'intéresse à tout ce qui fait tourner une infrastructure : serveurs, réseaux, pare-feu et services aux utilisateurs. J'aime comprendre comment les choses fonctionnent, monter des maquettes complètes — comme l'infrastructure StadiumCompany — et documenter chaque étape pour qu'un autre administrateur puisse reprendre le travail.</p>
+    <p style="color:var(--text-2)">En alternance, je suis technicien support informatique à la DGFiP (ENFiP de Noisy-le-Grand), où j'assure le support d'une quarantaine de salariés. Ce poste m'apprend à être à l'écoute des utilisateurs et à résoudre les incidents avec méthode. Mes expériences précédentes, dans la gestion RH à la Cour d'appel de Paris et le traitement de documents chez Iron Mountain, m'ont donné de la rigueur et le sens du travail en équipe.</p>
+    <div class="term" aria-label="Présentation façon terminal">
+      <div><span class="p">visiteur@portfolio</span><span class="c">:~$</span> whoami</div>
+      <div>selvame — étudiant BTS SIO SISR</div>
+      <div><span class="p">visiteur@portfolio</span><span class="c">:~$</span> cat objectif.txt</div>
+      <div>Devenir administrateur systèmes &amp; réseaux, puis évoluer vers la cybersécurité.</div>
+    </div>
+    <h2 id="projet">Projet professionnel</h2>
+    <p style="color:var(--text-2)">Mon objectif est de devenir administrateur systèmes &amp; réseaux, puis d'évoluer vers la cybersécurité. Après le BTS, je souhaite poursuivre en <strong>Bachelor Cybersécurité, systèmes et réseaux</strong> à ENSITECH (2027–2028), pour me spécialiser dans l'administration des infrastructures, la supervision réseau et la sécurité des systèmes.</p>
+    <h2 id="qualites">Savoir-être</h2>
+    <div class="meta-row">${['Rigueur', 'Curiosité', 'Autonomie', "Esprit d'équipe", "Sens du service"].map(q => `<span class="tag">${t(q)}</span>`).join('')}</div>
+    ${pager('/profil')}`,
+
+  '/formation': () => `
+    ${breadcrumb('Parcours', 'Formation & expériences')}
+    <h1 class="page">Formation &amp; expériences</h1>
+    <p class="lead">Mon parcours scolaire, mes expériences professionnelles et mes certifications.</p>
+    <h2 id="cursus">Formation</h2>
+    ${timeline(FORMATION)}
+    <h2 id="experiences">Expériences professionnelles</h2>
+    ${timeline(EXPERIENCES)}
+    <h2 id="bts">Le BTS SIO option SISR</h2>
+    <p style="color:var(--text-2)">L'option <strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong> forme à l'installation, l'administration et la sécurisation des infrastructures informatiques : serveurs, réseaux, services et postes de travail.</p>
+    <h2 id="certifs">Certifications</h2>
+    <div class="meta-row">${CERTIFS.map(c => `<span class="tag">${t(c)}</span>`).join('')}</div>
+    ${pager('/formation')}`,
+
+  '/realisations': () => `
+    ${breadcrumb('Réalisations', "Vue d'ensemble")}
+    <h1 class="page">Réalisations professionnelles</h1>
+    <p class="lead">Travaux réalisés en formation et en entreprise. Chaque fiche détaille le contexte, les étapes et les compétences E5 mobilisées.</p>
+    <div class="cards two" style="margin-top:30px">${REALISATIONS.map(r => `
+      <a class="card" href="#/realisations/${r.id}"><span class="arrow">${ic('arrow')}</span>
+        <div class="ico">${ic(typeIcon(r))}</div>
+        <h3>${r.titre}</h3><p>${t(r.resume)}</p>
+        <div class="meta"><span class="tag">${r.type}</span>${compChips(r.competences)}</div></a>`).join('')}
+    </div>
+    ${pager('/realisations')}`,
+
+  '/synthese': () => `
+    ${breadcrumb('Réalisations', 'Tableau de synthèse E5')}
+    <h1 class="page">Tableau de synthèse E5</h1>
+    <p class="lead">Correspondance entre mes réalisations et les six blocs de compétences de l'épreuve E5.</p>
+    <h2 id="legende">Légende</h2>
+    <div class="table-wrap"><table><tbody>${COMPETENCES_E5.map((c, i) => `<tr><td style="width:60px"><span class="tag blue">C${i + 1}</span></td><td>${c}</td></tr>`).join('')}</tbody></table></div>
+    <h2 id="tableau">Tableau</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Réalisation</th><th>Cadre</th><th>Période</th>${COMPETENCES_E5.map((_, i) => `<th class="c">C${i + 1}</th>`).join('')}</tr></thead>
+      <tbody>${REALISATIONS.map(r => `<tr>
+        <td><a href="#/realisations/${r.id}" style="font-weight:600">${r.court}</a></td>
+        <td class="muted" style="font-size:13px">${r.cadre}</td>
+        <td style="font-size:13px">${t(r.periode)}</td>
+        ${COMPETENCES_E5.map((_, i) => `<td class="c">${r.competences.includes(i + 1) ? '<span class="check">✓</span>' : ''}</td>`).join('')}
+      </tr>`).join('')}</tbody>
+    </table></div>
+    ${pager('/synthese')}`,
+
+  '/competences': () => `
+    ${breadcrumb('Référence', 'Compétences')}
+    <h1 class="page">Compétences techniques</h1>
+    <p class="lead">Technologies pratiquées en TP, en projet et en stage, avec mon niveau actuel.</p>
+    ${COMPETENCES_TECH.map(g => `
+      <h2 id="${g.domaine.toLowerCase().replace(/[^a-z]/g, '')}">${g.domaine}</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Technologie</th><th style="width:140px">Niveau</th></tr></thead>
+        <tbody>${g.items.map(([n, l]) => `<tr><td>${n}</td><td><span class="tag ${l === 'Maîtrise' ? 'blue' : ''}">${l}</span></td></tr>`).join('')}</tbody>
+      </table></div>`).join('')}
+    ${pager('/competences')}`,
+
+  '/veille': () => `
+    ${breadcrumb('Référence', 'Veille technologique')}
+    <h1 class="page">Veille technologique</h1>
+    <p class="lead">Comment je me tiens informé des évolutions de mon métier.</p>
+    <div class="callout">${ic('rss')}<div><strong>Sujet principal</strong> — ${t(VEILLE.sujet)}</div></div>
+    <h2 id="pourquoi">Pourquoi ce sujet</h2>
+    <p style="color:var(--text-2)">${t(VEILLE.pourquoi)}</p>
+    ${VEILLE.synthese ? `<h2 id="synthese">Synthèse</h2>${VEILLE.synthese.map(p => `<p style="color:var(--text-2)">${p}</p>`).join('')}` : ''}
+    <h2 id="themes">Axes de veille</h2>
+    <div class="cards two">${VEILLE.themes.map(([n, d]) => `<div class="card"><h3>${n}</h3><p>${d}</p></div>`).join('')}</div>
+    <h2 id="outils">Outils &amp; méthode</h2>
+    <div class="table-wrap"><table><tbody>${VEILLE.outils.map(([n, d]) => `<tr><td style="width:180px;font-weight:600">${n}</td><td style="color:var(--text-2)">${d}</td></tr>`).join('')}</tbody></table></div>
+    <h2 id="articles">Derniers articles</h2>
+    ${VEILLE.articles.length ? `<div class="table-wrap"><table><thead><tr><th>Date</th><th>Article</th><th>Source</th></tr></thead><tbody>
+      ${VEILLE.articles.map(a => `<tr><td class="mono" style="font-size:13px">${a.date}</td><td><a href="${a.lien}" target="_blank" rel="noopener" style="color:var(--accent)">${a.titre}</a></td><td class="muted">${a.source}</td></tr>`).join('')}
+      </tbody></table></div>` : `<p>${t('TODO(ajoute tes articles dans VEILLE.articles)')}</p>`}
+    ${pager('/veille')}`,
+
+  '/contact': () => `
+    ${breadcrumb('Référence', 'Contact')}
+    <h1 class="page">Contact</h1>
+    <p class="lead">Un projet, une question technique ou une opportunité pour la suite de mon parcours ? Laissez-moi un message.</p>
+    <div class="contact-grid">
+      <form class="form" id="contactForm" novalidate>
+        <h3>Envoyer un message</h3>
+        <p class="sub" style="display:flex;align-items:center;gap:8px"><span class="dot"></span>Délai de réponse moyen : moins d'une heure.</p>
+        ${PROFIL.cleFormulaire ? '' : `<p>${t('TODO(formulaire inactif : colle ta clé Web3Forms dans PROFIL.cleFormulaire)')}</p>`}
+        <div class="field"><label for="f-nom">Nom</label><input id="f-nom" name="name" autocomplete="name" required maxlength="100"></div>
+        <div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email" required maxlength="150"></div>
+        <div class="field"><label for="f-objet">Objet</label><input id="f-objet" name="objet" maxlength="150" placeholder="Alternance, stage, question…"></div>
+        <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" required maxlength="5000"></textarea></div>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn" type="submit">${ic('mail')} Envoyer le message</button>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+      </form>
+      <div class="contact-side">
+        <a class="card" href="mailto:${PROFIL.email}"><span class="arrow">${ic('arrow')}</span><div class="ico">${ic('mail')}</div>
+          <h3>Email</h3><p>${PROFIL.email}</p></a>
+        <a class="card" href="${PROFIL.linkedin}" target="_blank" rel="noopener noreferrer"><span class="arrow">${ic('arrow')}</span><div class="ico">${ic('user')}</div>
+          <h3>LinkedIn</h3><p>${PROFIL.nom}</p></a>
+        ${PROFIL.cv ? `<a class="card" href="${PROFIL.cv}" download><span class="arrow">${ic('download')}</span><div class="ico">${ic('file')}</div><h3>CV</h3><p>Télécharger en PDF</p></a>` : ''}
+      </div>
+    </div>
+    ${pager('/contact')}`,
+};
+
+function realisationView(r) {
+  const path = '/realisations/' + r.id;
+  return `
+    ${breadcrumb('Réalisations', r.court, ["Vue d'ensemble", '/realisations'])}
+    <h1 class="page">${r.titre}</h1>
+    <div class="meta-row">
+      <span class="tag">${r.type}</span>
+      <span class="tag">${r.cadre}</span>
+      ${r.entreprise ? `<span class="tag">${t(r.entreprise)}</span>` : ''}
+      <span class="muted mono" style="font-size:12.5px">${t(r.periode)}</span>
+    </div>
+    <p class="lead">${t(r.resume)}</p>
+    <h2 id="contexte">Contexte</h2>
+    <p style="color:var(--text-2)">${t(r.contexte)}</p>
+    <h2 id="objectifs">Objectifs</h2>
+    <ul class="steps">${r.objectifs.map(o => `<li>${t(o)}</li>`).join('')}</ul>
+    <h2 id="environnement">Environnement technique</h2>
+    <div class="meta-row">${r.environnement.map(e => `<span class="tag">${t(e)}</span>`).join('')}</div>
+    ${(r.tableaux || []).map(tb => `
+      <h2 id="${tb.id}">${tb.titre}</h2>
+      <div class="table-wrap"><table>
+        <thead><tr>${tb.colonnes.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+        <tbody>${tb.lignes.map(l => `<tr>${l.map((c, i) => `<td${i === 0 ? ' style="font-weight:600;white-space:nowrap"' : ''}>${statut(c)}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table></div>`).join('')}
+    <h2 id="etapes">Étapes réalisées</h2>
+    <ol class="steps">${r.etapes.map(e => `<li>${t(e)}</li>`).join('')}</ol>
+    <h2 id="competences">Compétences E5 mobilisées</h2>
+    <div class="table-wrap"><table><tbody>${r.competences.map(n => `<tr><td style="width:60px"><span class="tag blue">C${n}</span></td><td>${COMPETENCES_E5[n - 1]}</td></tr>`).join('')}</tbody></table></div>
+    ${r.galerie && r.galerie.length ? `
+      <h2 id="captures">Captures d'écran</h2>
+      <div class="gallery">${r.galerie.map((g, i) => `
+        <figure class="shot">
+          <button class="shot-img" type="button" data-full="${g.img}" data-cap="${g.titre}" aria-label="Agrandir : ${g.titre}">
+            <img src="${g.img}" alt="${g.titre}" loading="lazy">
+            <span class="zoom">${ic('zoom')}</span>
+          </button>
+          <figcaption><span class="tag blue">${String(i + 1).padStart(2, '0')}</span><div><strong>${g.titre}</strong><p>${g.legende}</p></div></figcaption>
+        </figure>`).join('')}
+      </div>` : ''}
+    <h2 id="documents">Documents &amp; preuves</h2>
+    ${r.documents.length
+      ? r.documents.map(d => `<a class="doc-link" href="${d.fichier}" target="_blank">${ic('file')}<span>${d.nom}</span><span class="muted">${d.fichier.split('.').pop().toUpperCase()}</span></a>`).join('')
+      : `<p>${t('TODO(ajoute ta doc technique, captures, procédures — en PDF)')}</p>`}
+    ${pager(path)}`;
+}
+
+/* ---------- Routeur ---------- */
+function route() {
+  const path = (location.hash.replace(/^#/, '') || '/').split('?')[0];
+  const main = document.getElementById('main');
+  let html, tocItems = null;
+
+  const r = path.startsWith('/realisations/') && REALISATIONS.find(x => '/realisations/' + x.id === path);
+  if (r) {
+    html = realisationView(r);
+  } else if (VIEWS[path]) {
+    html = VIEWS[path]();
+  } else {
+    location.hash = '#/'; return;
+  }
+
+  main.innerHTML = `<article class="fade">${html}</article>`;
+
+  // Table des matières auto pour les pages avec plusieurs sections
+  if (!tocItems) {
+    const h2s = [...main.querySelectorAll('h2[id]')];
+    if (h2s.length >= 3) tocItems = h2s.map(h => [h.id, h.textContent]);
+  }
+  if (tocItems) {
+    main.classList.remove('no-toc');
+    main.insertAdjacentHTML('beforeend', toc(tocItems));
+    main.querySelectorAll('.toc a').forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById(a.dataset.target)?.scrollIntoView();
+    }));
+  } else {
+    main.classList.add('no-toc');
+  }
+
+  if (path === '/contact') initContactForm();
+
+  const titre = (PAGES.find(p => p.path === path) || {}).titre;
+  document.title = (path === '/' ? '' : titre + ' — ') + PROFIL.nom + ' · Portfolio SISR';
+  renderSidebar(path);
+  document.body.classList.remove('nav-open');
+  document.getElementById('menuBtn').setAttribute('aria-expanded', 'false');
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Agrandissement des captures ---------- */
+const lightbox = document.getElementById('lightbox');
+document.getElementById('lbClose').innerHTML = ic('close');
+function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.shot-img');
+  if (b) {
+    document.getElementById('lbImg').src = b.dataset.full;
+    document.getElementById('lbImg').alt = b.dataset.cap;
+    document.getElementById('lbCap').textContent = b.dataset.cap;
+    lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
+    document.getElementById('lbClose').focus();
+  } else if (e.target === lightbox || e.target.closest('#lbClose')) {
+    closeLightbox();
+  }
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
+
+/* ---------- Formulaire de contact (via Web3Forms) ---------- */
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  const btn = form.querySelector('button[type=submit]');
+  const show = (type, msg) => { status.className = 'form-status ' + type; status.textContent = msg; };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(form));
+    if (d.botcheck) return; // robot détecté : on ignore
+    if (!d.name.trim() || !d.message.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) {
+      show('err', 'Merci de renseigner votre nom, une adresse email valide et votre message.');
+      return;
+    }
+    if (!PROFIL.cleFormulaire) {
+      show('err', "Le formulaire n'est pas encore activé. Vous pouvez m'écrire directement à " + PROFIL.email + '.');
+      return;
+    }
+    btn.disabled = true;
+    show('ok', 'Envoi en cours…');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: PROFIL.cleFormulaire,
+          subject: 'Portfolio — ' + (d.objet.trim() || 'Nouveau message') + ' (' + d.name.trim() + ')',
+          from_name: 'Portfolio Selvame Srinivassane',
+          name: d.name.trim(),
+          email: d.email.trim(),
+          replyto: d.email.trim(),
+          message: d.message.trim(),
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.success === false) throw new Error(json.message || res.status);
+      form.reset();
+      show('ok', '✓ Message envoyé ! Je vous réponds au plus vite.');
+    } catch (err) {
+      show('err', "L'envoi a échoué. Réessayez plus tard ou écrivez-moi directement à " + PROFIL.email + '.');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
+
+/* ---------- Thème ---------- */
+const themeBtn = document.getElementById('themeBtn');
+function paintThemeBtn() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  themeBtn.innerHTML = ic(dark ? 'sun' : 'moon');
+}
+themeBtn.addEventListener('click', () => {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  paintThemeBtn();
+});
+paintThemeBtn();
+
+/* ---------- Menu mobile ---------- */
+document.getElementById('menuBtn').addEventListener('click', (e) => {
+  const open = document.body.classList.toggle('nav-open');
+  e.currentTarget.setAttribute('aria-expanded', String(open));
+});
+document.getElementById('backdrop').addEventListener('click', () => document.body.classList.remove('nav-open'));
+
+window.addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
