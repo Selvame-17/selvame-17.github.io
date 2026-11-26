@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><title>Fiche technique — Support utilisateurs et préparation des postes</title><link rel="stylesheet" href="../fiche.css"></head>
+<body>
+<div class="head"><div class="who"><span class="logo">SS</span>Selvame Srinivassane — BTS SIO SISR</div><span>Fiche technique — Alternance DGFiP</span></div>
+
+<div class="kicker">RÉALISATION EN MILIEU PROFESSIONNEL</div>
+<h1>Support utilisateurs et préparation des postes de travail</h1>
+<p class="lead">Support informatique de premier niveau pour une quarantaine d'agents, et préparation des postes avec un socle logiciel adapté au profil de chaque utilisateur.</p>
+<div class="meta">
+  <div><small>Structure</small><b>DGFiP — ENFiP Noisy-le-Grand</b></div>
+  <div><small>Service</small><b>Pôle Soutien informatique</b></div>
+  <div><small>Période</small><b>01/10/25 au 31/07/27</b></div>
+</div>
+
+<section>
+  <h2><span class="n">1.</span>Contexte</h2>
+  <p>Le pôle Soutien informatique de l'ENFiP assure l'assistance d'une quarantaine d'agents et des formateurs de l'école. Chaque nouveau poste doit être préparé avec un <b>socle logiciel</b> adapté à son utilisateur : certaines applications sont réservées à certains niveaux hiérarchiques, d'autres non.</p>
+</section>
+
+<section>
+  <h2><span class="n">2.</span>Missions</h2>
+  <ul>
+    <li><b>Support de premier niveau :</b> prise en charge des demandes et des incidents, diagnostic et résolution.</li>
+    <li><b>Soclage des postes :</b> installation du socle logiciel selon la catégorie de l'utilisateur.</li>
+    <li><b>Mise en service :</b> branchement, configuration et test du matériel sur les nouveaux postes.</li>
+    <li><b>Diagnostic réseau</b> à l'aide d'un équipement d'analyse.</li>
+    <li><b>Observation de l'équipe réseau de Noisiel</b> lors de ses interventions sur les pannes réseau, pour apprendre sa méthode de diagnostic.</li>
+  </ul>
+  <div class="tags"><span class="tag">Windows 10 / 11</span><span class="tag">Windows Server</span><span class="tag">TCP/IP</span><span class="tag">DHCP</span><span class="tag">DNS</span><span class="tag">Outil d'analyse réseau</span></div>
+</section>
+
+<section>
+  <h2><span class="n">3.</span>Exemple d'incident résolu</h2>
+  <table>
+    <tr><th style="width:22%">Étape</th><th>Détail</th></tr>
+    <tr><td>Signalement</td><td>Une agente n'a plus accès au réseau : ni Internet, ni lecteurs partagés, ni messagerie.</td></tr>
+    <tr><td>Diagnostic</td><td><code>ipconfig</code> affiche une adresse en 169.254.x.x (APIPA) : le poste ne reçoit pas d'adresse du serveur DHCP. Le voyant de la carte réseau est éteint, donc le problème est physique. Le câble testé sur un autre poste ne fonctionne pas non plus.</td></tr>
+    <tr><td>Résolution</td><td>Remplacement du câble défectueux, puis <code>ipconfig /renew</code> : le poste obtient une adresse valide. Vérification avec un <code>ping</code> vers la passerelle, puis de l'accès aux lecteurs réseau et à la messagerie.</td></tr>
+    <tr><td>Clôture</td><td>Confirmation auprès de l'utilisatrice, câble défectueux retiré du stock.</td></tr>
+  </table>
+  <div class="callout"><b>Méthode retenue :</b> partir du plus simple (couche physique) avant de remonter vers l'adressage IP puis les services. C'est aussi la méthode que j'ai observée chez l'équipe réseau de Noisiel.</div>
+</section>
+
+<section>
+  <h2><span class="n">4.</span>Compétences E5 mobilisées</h2>
+  <div class="comp"><span>C2 — Répondre aux incidents et aux demandes d'assistance et d'évolution</span><span>C5 — Mettre à disposition des utilisateurs un service informatique</span></div>
+</section>
+
+<div class="callout note">Aucune capture d'écran n'est jointe : il s'agit de l'environnement de production d'une administration, soumis à des règles de confidentialité.</div>
+<div class="foot"><span>Selvame Srinivassane — Portfolio BTS SIO SISR</span><span>Novembre 2026</span></div>
+</body></html>

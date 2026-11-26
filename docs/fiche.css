@@ -1,0 +1,42 @@
+/* Style commun des fiches techniques courtes (impression A4) */
+@page { size: A4; margin: 12mm 14mm 12mm; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; font-size: 10pt; line-height: 1.45; color: #18181b; }
+p { margin: 0 0 7pt; }
+ul, ol { margin: 0 0 8pt; padding-left: 16pt; }
+li { margin-bottom: 2pt; }
+code { font-family: Consolas, monospace; font-size: 9.5pt; background: #f3f4f6; padding: 0 4px; border-radius: 3px; }
+
+.head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 8pt; border-bottom: 1px solid #e4e4e7; margin-bottom: 16pt; font-size: 9pt; color: #52525b; }
+.head .who { display: flex; align-items: center; gap: 8pt; }
+.logo { width: 24pt; height: 24pt; border-radius: 6pt; background: #0b0b0c; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 8.5pt; }
+
+.kicker { font-family: Consolas, monospace; font-size: 9pt; color: #2563eb; margin-bottom: 4pt; }
+h1 { font-size: 19pt; line-height: 1.15; margin: 0 0 6pt; letter-spacing: -.01em; }
+.lead { font-size: 10.5pt; color: #3f3f46; margin-bottom: 10pt; }
+
+.meta { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #e4e4e7; border-radius: 7pt; overflow: hidden; margin-bottom: 16pt; }
+.meta div { padding: 7pt 10pt; border-right: 1px solid #e4e4e7; }
+.meta div:last-child { border-right: 0; }
+.meta small { display: block; color: #71717a; font-size: 7.5pt; text-transform: uppercase; letter-spacing: .05em; }
+.meta b { font-size: 9.5pt; }
+
+h2 { font-size: 12pt; margin: 11pt 0 5pt; padding-bottom: 3pt; border-bottom: 2px solid #2563eb; break-after: avoid; }
+h2 .n { color: #2563eb; margin-right: 5pt; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 5pt; margin-bottom: 8pt; }
+.tag { font-family: Consolas, monospace; font-size: 8.5pt; padding: 1pt 6pt; border-radius: 4pt; background: #f4f4f5; border: 1px solid #e4e4e7; }
+
+table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 3pt 0 8pt; }
+tr { break-inside: avoid; }
+th { background: #f4f4f5; text-align: left; font-weight: 600; color: #3f3f46; }
+th, td { border: 1px solid #e4e4e7; padding: 5pt 7pt; vertical-align: top; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+
+.callout { background: #eff4ff; border: 1px solid #c7d7fe; border-left: 3pt solid #2563eb; border-radius: 6pt; padding: 7pt 10pt; margin: 6pt 0 8pt; font-size: 10pt; }
+.note { background: #fafafa; border: 1px solid #e4e4e7; border-left: 3pt solid #a1a1aa; }
+.comp { display: flex; gap: 6pt; flex-wrap: wrap; }
+.comp span { font-size: 9pt; padding: 2pt 7pt; border-radius: 4pt; background: #eff4ff; color: #1d4ed8; border: 1px solid #c7d7fe; }
+.meta { margin-bottom: 12pt; }
+.head { margin-bottom: 12pt; }
+.foot { margin-top: 12pt; padding-top: 6pt; border-top: 1px solid #e4e4e7; font-size: 8.5pt; color: #71717a; display: flex; justify-content: space-between; }
